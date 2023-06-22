@@ -1,8 +1,7 @@
-package com.example.demo.dao;
+package com.example.demo.service;
 
 import com.example.demo.model.Product;
 
-public interface ProductDao {
-
+public interface ProductService {
     public Product getProductById(Integer productId);
 }
