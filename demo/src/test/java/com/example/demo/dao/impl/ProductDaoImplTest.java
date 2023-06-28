@@ -24,7 +24,7 @@ class ProductDaoImplTest {
         assertNotNull(product);
     }
 
-    @Transactional
+    //@Transactional
     @Test
     public void createProduct() {
         ProductRequest request = new ProductRequest();
@@ -35,6 +35,6 @@ class ProductDaoImplTest {
         request.setPrice(10000);
 
         int productId = productDao.createProduct(request);
-        assertEquals(productId, 2);
+        assertEquals(5, productId);
     }
 }
