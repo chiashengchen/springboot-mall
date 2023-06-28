@@ -24,7 +24,7 @@ class ProductDaoImplTest {
         assertNotNull(product);
     }
 
-    //@Transactional
+    @Transactional
     @Test
     public void createProduct() {
         ProductRequest request = new ProductRequest();
