@@ -2,6 +2,7 @@ package com.example.demo.dao.impl;
 
 import com.example.demo.constant.ProductCategory;
 import com.example.demo.dao.ProductDao;
+import com.example.demo.dto.ProductQueryParam;
 import com.example.demo.dto.ProductRequest;
 import com.example.demo.model.Product;
 import com.example.demo.rowmapper.ProductRowMapper;
@@ -24,11 +25,13 @@ public class ProductDaoImpl implements ProductDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
+    public List<Product> getProducts(ProductQueryParam queryParam) {
         String sql = "SELECT product_id, product_name, category, image_url, price, stock, description, created_date, last_modified_date" +
                 " FROM product WHERE 1=1";
         // WHERE 1=1 是個廢話，但她可以滿足如果需要增加字串的話，用 AND 的方式增加
         Map<String, Object> map = new HashMap<>();
+        ProductCategory category = queryParam.getCategory();
+        String search = queryParam.getSearch();
         if(category != null) {
             sql = sql + " AND category = :category";
             map.put("category", category.name());
