@@ -32,6 +32,8 @@ public class ProductDaoImpl implements ProductDao {
         Map<String, Object> map = new HashMap<>();
         ProductCategory category = queryParam.getCategory();
         String search = queryParam.getSearch();
+        String orderBy = queryParam.getOrderBy();
+        String sort = queryParam.getSort();
         if(category != null) {
             sql = sql + " AND category = :category";
             map.put("category", category.name());
@@ -41,6 +43,8 @@ public class ProductDaoImpl implements ProductDao {
             // % 代表任意符號，一定要加在 map
             map.put("search", "%" + search + "%");
         }
+        // 不能用 map 的方式
+        sql = sql + " ORDER BY " + orderBy + " " + sort;
         List<Product> products = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
         return products;
     }
